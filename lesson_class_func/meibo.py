@@ -1,4 +1,14 @@
+import sys
+
 class Person:
+    HEIGHT = "身長"
+    WEIGHT = "体重"
+    FOOTSIZE = "足のサイズ"
+    BMI = "BMI"
+    PROFESSION = "職業"
+    WORKING_HISTORY = "職歴"
+    LIST_OF_SETTINGS = [HEIGHT, WEIGHT, FOOTSIZE, BMI, PROFESSION, WORKING_HISTORY]
+
     def __init__(self, record): # コンストラクタ
         self.name = record[0]
         self.height = int(record[1])
@@ -17,19 +27,37 @@ class Person:
         print("working_history:", self.working_history)
         print("publishing_settings:", self.publishing_settings)
     
-    def print_height(self):
+    def print_height(self, flag: bool):
+        if flag == False:
+            return
         print(self.name+"さん"+"の"+"身長"+"は"+str(self.height)+"(cm)"+"です。")
     
-    def print_weight(self):
+    def print_weight(self, flag: bool):
+        if flag == False:
+            return
         print(self.name+"さん"+"の"+"体重"+"は"+str(self.weight)+"(kg)"+"です。")
     
-    def print_footsize(self):
+    def print_footsize(self, flag: bool):
+        if flag == False:
+            return
         print(self.name+"さん"+"の"+"足のサイズ"+"は"+str(self.footsize)+"です。")
     
-    def print_profession(self):
+    def bmi(self):
+        return self.weight / ((self.height / 100) ** 2)
+
+    def print_bmi(self, flag: bool):
+        if flag == False:
+            return
+        print(self.name+"さん"+"の"+"BMI"+"は"+str(self.bmi())+"(kg/m2)"+"です。")
+    
+    def print_profession(self, flag: bool):
+        if flag == False:
+            return
         print(self.name+"さん"+"の"+"職業"+"は"+str(self.profession)+"です。")
 
-    def print_working_history(self):
+    def print_working_history(self, flag: bool):
+        if flag == False:
+            return
         print(self.name+"さん"+"の"+"職歴"+"は"+str(self.working_history)+"です。")
     
     def is_public(self):
@@ -38,7 +66,7 @@ class Person:
         else:
             return False
 
-def print_meibo():
+def print_meibo(settingList: list):
     print("in meibo()")
 
     # file open&input part
@@ -57,19 +85,38 @@ def print_meibo():
 
     # output part
     print(str(len(meibo))+"人の名簿を受け取りました。")
-    all_print(meibo)
+    all_print(meibo, settingList)
 
     # file close
     f.close()
 
-def all_print(persons: Person):
+def all_print(persons: Person, settingList: list):
+    print("in all_print()")
     for person in persons:
-        # print(person)
         if person.is_public() == False:
             continue
-        # person.properties()
-        person.print_height()
-        person.print_weight()
-        person.print_footsize()
-        person.print_profession()
-        person.print_working_history()
+
+        t = create_dict(settingList, person.LIST_OF_SETTINGS)
+        person.print_height(t[person.HEIGHT])
+        person.print_weight(t[person.WEIGHT])
+        person.print_footsize(t[person.FOOTSIZE])
+        person.print_bmi(t[person.BMI])
+        person.print_profession(t[person.PROFESSION])
+        person.print_working_history(t[person.WORKING_HISTORY])
+
+def create_dict(settingList: list, LIST_OF_SETTINGS: list[str]):
+    print("in create_dict()")
+    dict = {}
+    index = 0
+    for setting in LIST_OF_SETTINGS:
+        if setting in settingList:
+            dict[setting] = True
+        elif setting not in settingList:
+            dict[setting] = False
+        else:
+            print("setting error")
+            sys.exit()
+        index += 1
+    
+    print("dict:", dict)
+    return dict
