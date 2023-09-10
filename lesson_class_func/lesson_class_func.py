@@ -12,6 +12,26 @@ def main():
     
     meibo()
 
+class Person:
+    def __init__(self, record):                  # コンストラクタ
+        self.name = record[0]
+        self.height = record[1]
+        self.weight = record[2]
+        self.footsize = record[3]
+        self.profession = record[4]
+        self.working_history = record[5]
+        self.publishing_settings = record[6]
+    
+    def properties(self):
+        print("name:", self.name)
+        print("height:", self.height)
+        print("weight:", self.weight)
+        print("footsize:", self.footsize)
+        print("profession:", self.profession)
+        print("working_history:", self.working_history)
+        print("publishing_settings:", self.publishing_settings)
+
+
 def meibo():
     print("in meibo()")
     path = './meibo.txt'
@@ -21,14 +41,17 @@ def meibo():
     print(type(f))
     # <class '_io.TextIOWrapper'>
     s = f.read()
-    print(type(s))
-    print(s)
+    # print(type(s))
+    # print(s)
     meibo_list = s.split('\n')
-    print(meibo_list)
+    # print(meibo_list)
     for record in meibo_list:
         if record == '':
             continue
         print(record)
+        tmp = record.split()
+        print(tmp)
+        Person(tmp).properties()
 
 
     f.close()
