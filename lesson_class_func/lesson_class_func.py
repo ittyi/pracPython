@@ -1,14 +1,12 @@
 import sys
 import hello
 import meibo
+import general_purpose
 
 def main():
     print("main start")
     args = sys.argv
-    count_length = 0
-    for i in range(len(args)):
-        print(args[i])
-        count_length += 1
+    count_length = general_purpose.ft_len(args)
 
     if count_length < 2:
         print("Usage: python3 lesson_class_func.py -h or -m")

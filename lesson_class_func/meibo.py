@@ -1,4 +1,5 @@
 import sys
+import general_purpose
 
 def print_meibo(settingList: list):
     print("in meibo()")
@@ -18,7 +19,7 @@ def print_meibo(settingList: list):
         meibo.append(Person(tmp))
 
     # output part
-    print(str(len(meibo))+"人の名簿を受け取りました。")
+    print(str(general_purpose.ft_len(meibo))+"人の名簿を受け取りました。")
     all_print(meibo, settingList)
 
     # file close
