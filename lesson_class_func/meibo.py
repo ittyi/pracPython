@@ -19,7 +19,8 @@ def print_meibo(settingList: list):
         meibo.append(Person(tmp))
 
     # output part
-    print(str(general_purpose.ft_len(meibo))+"人の名簿を受け取りました。")
+
+    print(str(count_public(meibo))+"人の名簿を受け取りました。")
     all_print(meibo, settingList)
 
     # file close
@@ -97,6 +98,13 @@ class Person:
         else:
             return False
 
+def count_public(persons: Person):
+    count = 0
+    for person in persons:
+        if person.is_public() == True:
+            count += 1
+    return count
+
 def all_print(persons: Person, settingList: list):
     # print("in all_print()")
     t = create_dict(settingList, Person.LIST_OF_SETTINGS)
@@ -116,9 +124,11 @@ def create_dict(settingList: list, LIST_OF_SETTINGS: list[str]):
     # print("in create_dict()")
     dict = {}
     index = 0
+    flg_more_than_once_in_settingList = False
     for setting in LIST_OF_SETTINGS:
         if setting in settingList:
             dict[setting] = True
+            flg_more_than_once_in_settingList = True
         elif setting not in settingList:
             dict[setting] = False
         else:
@@ -126,5 +136,7 @@ def create_dict(settingList: list, LIST_OF_SETTINGS: list[str]):
             sys.exit()
         index += 1
     
-    # print("dict:", dict)
+    print("dict:", dict)
+    if flg_more_than_once_in_settingList == False:
+        return {'身長': True, '体重': True, '足のサイズ': True, 'BMI': True, '職業': True, '職歴': True}
     return dict
