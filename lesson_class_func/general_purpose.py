@@ -1,5 +1,5 @@
-def ft_len(str: str):
+def ft_len(list):
     count = 0
-    for i in str:
+    for i in list:
         count += 1
     return count
