@@ -109,6 +109,7 @@ def all_print(persons: Person, settingList: list):
         person.print_bmi(t[person.BMI])
         person.print_profession(t[person.PROFESSION])
         person.print_working_history(t[person.WORKING_HISTORY])
+        print()
 
 def create_dict(settingList: list, LIST_OF_SETTINGS: list[str]):
     # print("in create_dict()")
