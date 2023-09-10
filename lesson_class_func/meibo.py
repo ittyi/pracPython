@@ -1,5 +1,29 @@
 import sys
 
+def print_meibo(settingList: list):
+    print("in meibo()")
+
+    # file open&input part
+    path = './meibo.txt'
+    f = open(path)
+    s = f.read()
+
+    # Input processing part
+    meibo_list = s.split('\n')
+    meibo = []
+    for record in meibo_list:
+        if record == '':
+            continue
+        tmp = record.split()
+        meibo.append(Person(tmp))
+
+    # output part
+    print(str(len(meibo))+"人の名簿を受け取りました。")
+    all_print(meibo, settingList)
+
+    # file close
+    f.close()
+
 class Person:
     HEIGHT = "身長"
     WEIGHT = "体重"
@@ -66,37 +90,13 @@ class Person:
         else:
             return False
 
-def print_meibo(settingList: list):
-    print("in meibo()")
-
-    # file open&input part
-    path = './meibo.txt'
-    f = open(path)
-    s = f.read()
-
-    # Input processing part
-    meibo_list = s.split('\n')
-    meibo = []
-    for record in meibo_list:
-        if record == '':
-            continue
-        tmp = record.split()
-        meibo.append(Person(tmp))
-
-    # output part
-    print(str(len(meibo))+"人の名簿を受け取りました。")
-    all_print(meibo, settingList)
-
-    # file close
-    f.close()
-
 def all_print(persons: Person, settingList: list):
-    print("in all_print()")
+    # print("in all_print()")
+    t = create_dict(settingList, Person.LIST_OF_SETTINGS)
     for person in persons:
         if person.is_public() == False:
             continue
 
-        t = create_dict(settingList, person.LIST_OF_SETTINGS)
         person.print_height(t[person.HEIGHT])
         person.print_weight(t[person.WEIGHT])
         person.print_footsize(t[person.FOOTSIZE])
@@ -105,7 +105,7 @@ def all_print(persons: Person, settingList: list):
         person.print_working_history(t[person.WORKING_HISTORY])
 
 def create_dict(settingList: list, LIST_OF_SETTINGS: list[str]):
-    print("in create_dict()")
+    # print("in create_dict()")
     dict = {}
     index = 0
     for setting in LIST_OF_SETTINGS:
@@ -118,5 +118,5 @@ def create_dict(settingList: list, LIST_OF_SETTINGS: list[str]):
             sys.exit()
         index += 1
     
-    print("dict:", dict)
+    # print("dict:", dict)
     return dict
