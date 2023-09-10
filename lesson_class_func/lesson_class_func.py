@@ -5,15 +5,19 @@ import meibo
 def main():
     print("main start")
     args = sys.argv
+    count_length = 0
+    for i in range(len(args)):
+        print(args[i])
+        count_length += 1
 
-    if len(args) < 2:
+    if count_length < 2:
         print("Usage: python3 lesson_class_func.py -h or -m")
         sys.exit()
     
     argsList = []
-    if len(args) > 2:
+    if count_length > 2:
         print("len(args)")
-        for i in range(2, len(args)):
+        for i in range(2, count_length):
             print(args[i])
             argsList.append(args[i])
     
