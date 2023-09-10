@@ -88,7 +88,7 @@ class Person:
     def print_working_history(self, flag: bool):
         if flag == False:
             return
-        self.template_print(self.WORKING_HISTORY, str(self.working_history), "")
+        self.template_print(self.WORKING_HISTORY, str(self.working_history), "年")
     
     def is_public(self):
         if self.publishing_settings == "公開":
