@@ -33,6 +33,9 @@ class Person:
     WORKING_HISTORY = "職歴"
     LIST_OF_SETTINGS = [HEIGHT, WEIGHT, FOOTSIZE, BMI, PROFESSION, WORKING_HISTORY]
 
+    HONORIFIC_TITLE = "さん"
+    SUFFIX = "です。"
+
     def __init__(self, record): # コンストラクタ
         self.name = record[0]
         self.height = int(record[1])
@@ -54,17 +57,17 @@ class Person:
     def print_height(self, flag: bool):
         if flag == False:
             return
-        print(self.name+"さん"+"の"+"身長"+"は"+str(self.height)+"(cm)"+"です。")
+        print(self.name+self.HONORIFIC_TITLE+"の"+"身長"+"は"+str(self.height)+"(cm)"+self.SUFFIX)
     
     def print_weight(self, flag: bool):
         if flag == False:
             return
-        print(self.name+"さん"+"の"+"体重"+"は"+str(self.weight)+"(kg)"+"です。")
+        print(self.name+self.HONORIFIC_TITLE+"の"+"体重"+"は"+str(self.weight)+"(kg)"+self.SUFFIX)
     
     def print_footsize(self, flag: bool):
         if flag == False:
             return
-        print(self.name+"さん"+"の"+"足のサイズ"+"は"+str(self.footsize)+"です。")
+        print(self.name+self.HONORIFIC_TITLE+"の"+"足のサイズ"+"は"+str(self.footsize)+self.SUFFIX)
     
     def bmi(self):
         return self.weight / ((self.height / 100) ** 2)
@@ -72,17 +75,17 @@ class Person:
     def print_bmi(self, flag: bool):
         if flag == False:
             return
-        print(self.name+"さん"+"の"+"BMI"+"は"+str(self.bmi())+"(kg/m2)"+"です。")
+        print(self.name+self.HONORIFIC_TITLE+"の"+"BMI"+"は"+str(self.bmi())+"(kg/m2)"+self.SUFFIX)
     
     def print_profession(self, flag: bool):
         if flag == False:
             return
-        print(self.name+"さん"+"の"+"職業"+"は"+str(self.profession)+"です。")
+        print(self.name+self.HONORIFIC_TITLE+"の"+"職業"+"は"+str(self.profession)+self.SUFFIX)
 
     def print_working_history(self, flag: bool):
         if flag == False:
             return
-        print(self.name+"さん"+"の"+"職歴"+"は"+str(self.working_history)+"です。")
+        print(self.name+self.HONORIFIC_TITLE+"の"+"職歴"+"は"+str(self.working_history)+self.SUFFIX)
     
     def is_public(self):
         if self.publishing_settings == "公開":
